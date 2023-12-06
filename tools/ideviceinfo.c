@@ -231,7 +231,11 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "WARNING: Sending query with unknown domain \"%s\".\n", domain);
 	}
 
-	/* run query and output information */
+	node = plist_new_bool(1);
+	if(lockdownd_set_value(client, domain, key, node) == LOCKDOWN_E_SUCCESS) {
+		printf("Success!!\n");
+	}
+	/* run query and output information
 	if(lockdownd_get_value(client, domain, key, &node) == LOCKDOWN_E_SUCCESS) {
 		if (node) {
 			switch (format) {
@@ -251,7 +255,7 @@ int main(int argc, char *argv[])
 			plist_free(node);
 			node = NULL;
 		}
-	}
+	}*/
 
 	lockdownd_client_free(client);
 	idevice_free(device);
